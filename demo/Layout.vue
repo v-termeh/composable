@@ -3,6 +3,7 @@ import TimerDemo from "./components/TimerDemo.vue";
 import CountdownDemo from "./components/CountdownDemo.vue";
 import EmptySlotDemo from "./components/EmptySlotDemo.vue";
 import MediaQueriesDemo from "./components/MediaQueriesDemo.vue";
+import ShortcutDemo from "./components/ShortcutDemo.vue";
 </script>
 
 <template>
@@ -21,5 +22,7 @@ import MediaQueriesDemo from "./components/MediaQueriesDemo.vue";
         </EmptySlotDemo>
         <hr />
         <MediaQueriesDemo />
+        <hr />
+        <ShortcutDemo />
     </div>
 </template>
