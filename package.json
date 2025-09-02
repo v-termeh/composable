@@ -47,6 +47,7 @@
     },
     "peerDependencies": {
         "vue": "^3.5.0",
-        "@v-termeh/utils": "^0.0.5"
+        "@v-termeh/utils": "^0.0.5",
+        "@vueuse/core": "^13.9.0"
     }
 }
