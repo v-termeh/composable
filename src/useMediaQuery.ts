@@ -34,7 +34,7 @@ export function useMediaQueries() {
 
     // Orientation & Resolution
     /** @description Detects if the device has a high-resolution display (2x or higher pixel density) on screen devices. */
-    const isRetina = useMediaQuery("screen and (min-resolution: 2dppx)");
+    const isRetina = useMediaQuery("screen and (resolution >= 2dppx)");
     /** @description Detects if the device is in portrait orientation on screen devices. */
     const isPortrait = useMediaQuery("screen and (orientation: portrait)");
     /** @description Detects if the device is in landscape orientation on screen devices. */
