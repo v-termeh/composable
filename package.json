@@ -12,6 +12,13 @@
     "files": [
         "dist"
     ],
+    "exports": {
+        ".": {
+            "import": "./dist/composable.umd.js",
+            "require": "./dist/composable.es.js",
+            "types": "./dist/composable.d.ts"
+        }
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/v-termeh/composable.git"
@@ -27,7 +34,7 @@
         "helper"
     ],
     "scripts": {
-        "test": "vitest",
+        "test": "vite --config vite.config.ts demo",
         "build": "vite build",
         "prepare": "npm run build"
     },
@@ -36,11 +43,10 @@
         "@vitejs/plugin-vue": "^6.0.1",
         "typescript": "^5.9.2",
         "vite": "^7.1.3",
-        "vite-plugin-dts": "^4.5.4",
-        "vitest": "^3.2.4"
+        "vite-plugin-dts": "^4.5.4"
     },
     "peerDependencies": {
         "vue": "^3.5.0",
-        "@v-termeh/utils": "^0.0.4"
+        "@v-termeh/utils": "^0.0.5"
     }
 }

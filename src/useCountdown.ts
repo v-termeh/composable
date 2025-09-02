@@ -6,26 +6,31 @@ import { toHMS } from "@v-termeh/utils";
  * @returns An object containing methods to start/stop the timer and computed properties for the formatted time and timer state.
  */
 export function useCountdown() {
-    const hours = ref(0);
-    const minutes = ref(0);
-    const seconds = ref(0);
+    const h = ref(0);
+    const m = ref(0);
+    const s = ref(0);
+
     let interval: ReturnType<typeof setInterval> | null = null;
+
+    const hours = computed(() => h.value);
+    const minutes = computed(() => m.value);
+    const seconds = computed(() => s.value);
 
     /**
      * A computed property that returns the formatted timer.
      * Returns "00:00" if the timer is at or below zero.
      */
     const timer = computed(() => {
-        if (hours.value <= 0 && minutes.value <= 0 && seconds.value <= 0) {
+        if (h.value <= 0 && m.value <= 0 && s.value <= 0) {
             return "00:00";
         }
 
         const parts = [
-            Math.max(0, minutes.value).toString().padStart(2, "0"),
-            Math.max(0, seconds.value).toString().padStart(2, "0"),
+            Math.max(0, m.value).toString().padStart(2, "0"),
+            Math.max(0, s.value).toString().padStart(2, "0"),
         ];
-        if (hours.value > 0) {
-            parts.unshift(hours.value.toString().padStart(2, "0"));
+        if (h.value > 0) {
+            parts.unshift(h.value.toString().padStart(2, "0"));
         }
         return parts.join(":");
     });
@@ -34,7 +39,7 @@ export function useCountdown() {
      * A computed property indicating whether the timer is actively counting down.
      */
     const isTimerRunning = computed(
-        () => interval !== null && (hours.value > 0 || minutes.value > 0 || seconds.value > 0)
+        () => interval !== null && (h.value > 0 || m.value > 0 || s.value > 0)
     );
 
     /**
@@ -49,9 +54,9 @@ export function useCountdown() {
         stopTimer();
 
         const parts = toHMS(duration, unit);
-        hours.value = parts.hours;
-        minutes.value = parts.minutes;
-        seconds.value = parts.seconds;
+        h.value = parts.hours;
+        m.value = parts.minutes;
+        s.value = parts.seconds;
 
         startInterval();
     }
@@ -60,7 +65,7 @@ export function useCountdown() {
      * Resumes the timer from the current time, if paused and non-zero.
      */
     function resumeTimer() {
-        if (hours.value > 0 || minutes.value > 0 || seconds.value > 0) {
+        if (h.value > 0 || m.value > 0 || s.value > 0) {
             startInterval();
         }
     }
@@ -80,9 +85,9 @@ export function useCountdown() {
      */
     function stopTimer() {
         pauseTimer();
-        hours.value = 0;
-        minutes.value = 0;
-        seconds.value = 0;
+        h.value = 0;
+        m.value = 0;
+        s.value = 0;
     }
 
     /**
@@ -90,17 +95,17 @@ export function useCountdown() {
      */
     function startInterval() {
         interval = setInterval(() => {
-            seconds.value--;
-            if (seconds.value < 0) {
-                seconds.value = 59;
-                minutes.value--;
-                if (minutes.value < 0) {
-                    minutes.value = 59;
-                    hours.value--;
+            s.value--;
+            if (s.value < 0) {
+                s.value = 59;
+                m.value--;
+                if (m.value < 0) {
+                    m.value = 59;
+                    h.value--;
                 }
             }
 
-            if (hours.value <= 0 && minutes.value <= 0 && seconds.value <= 0) {
+            if (h.value <= 0 && m.value <= 0 && s.value <= 0) {
                 stopTimer();
             }
         }, 1000);

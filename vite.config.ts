@@ -3,8 +3,6 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import vue from "@vitejs/plugin-vue";
 
-/// <reference types="vitest" />
-// Configure Vitest (https://vitest.dev/config/)
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {
