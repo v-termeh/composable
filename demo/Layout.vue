@@ -4,6 +4,7 @@ import CountdownDemo from "./components/CountdownDemo.vue";
 import EmptySlotDemo from "./components/EmptySlotDemo.vue";
 import MediaQueriesDemo from "./components/MediaQueriesDemo.vue";
 import ShortcutDemo from "./components/ShortcutDemo.vue";
+import SignerDemo from "./components/SignerDemo.vue";
 </script>
 
 <template>
@@ -24,5 +25,7 @@ import ShortcutDemo from "./components/ShortcutDemo.vue";
         <MediaQueriesDemo />
         <hr />
         <ShortcutDemo />
+        <hr />
+        <SignerDemo />
     </div>
 </template>
