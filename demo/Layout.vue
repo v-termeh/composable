@@ -5,6 +5,7 @@ import EmptySlotDemo from "./components/EmptySlotDemo.vue";
 import MediaQueriesDemo from "./components/MediaQueriesDemo.vue";
 import ShortcutDemo from "./components/ShortcutDemo.vue";
 import SignerDemo from "./components/SignerDemo.vue";
+import FilterDemo from "./components/FilterDemo.vue";
 </script>
 
 <template>
@@ -27,5 +28,7 @@ import SignerDemo from "./components/SignerDemo.vue";
         <ShortcutDemo />
         <hr />
         <SignerDemo />
+        <hr />
+        <FilterDemo />
     </div>
 </template>

@@ -29,10 +29,12 @@ const data = {
 function run() {
     signer.sign(data).then((sign) => {
         console.log("Sign:", sign);
-        sign = sign;
+
+        data.filters.category = ["ebooks", "books"];
         signer.validate(data, sign).then((ok) => {
             console.log("Validate:", ok);
         });
+
         signer.validate({ test: 2 }, sign).then((ok) => {
             console.log("No Validate:", ok);
         });
