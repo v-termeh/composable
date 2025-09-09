@@ -6,6 +6,7 @@ import MediaQueriesDemo from "./components/MediaQueriesDemo.vue";
 import ShortcutDemo from "./components/ShortcutDemo.vue";
 import SignerDemo from "./components/SignerDemo.vue";
 import FilterDemo from "./components/FilterDemo.vue";
+import MaskDemo from "./components/MaskDemo.vue";
 </script>
 
 <template>
@@ -30,5 +31,7 @@ import FilterDemo from "./components/FilterDemo.vue";
         <SignerDemo />
         <hr />
         <FilterDemo />
+        <hr />
+        <MaskDemo />
     </div>
 </template>
