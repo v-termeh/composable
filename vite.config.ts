@@ -8,9 +8,9 @@ export default defineConfig({
     build: {
         sourcemap: true,
         lib: {
-            name: "vutils",
+            name: "composable",
             entry: resolve(__dirname, "src", "index.ts"),
-            fileName: (format) => `vutils.${format}.js`,
+            fileName: (format) => `composable.${format}.js`,
             formats: ["es", "cjs", "umd"],
         },
         rollupOptions: {
