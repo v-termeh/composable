@@ -1,6 +1,6 @@
 # Utils
 
-Utility functions for DOM, HTTP, and common browser operations.
+A collection of reusable Vue 3 composables for common tasks.
 
 ![NPM Version](https://img.shields.io/npm/v/@v-termeh/composable)
 ![NPM Downloads](https://img.shields.io/npm/dw/@v-termeh/composable)
