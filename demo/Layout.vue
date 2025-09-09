@@ -7,6 +7,7 @@ import ShortcutDemo from "./components/ShortcutDemo.vue";
 import SignerDemo from "./components/SignerDemo.vue";
 import FilterDemo from "./components/FilterDemo.vue";
 import MaskDemo from "./components/MaskDemo.vue";
+import InputComposablesDemo from "./components/InputComposablesDemo.vue";
 </script>
 
 <template>
@@ -33,5 +34,7 @@ import MaskDemo from "./components/MaskDemo.vue";
         <FilterDemo />
         <hr />
         <MaskDemo />
+        <hr />
+        <InputComposablesDemo />
     </div>
 </template>

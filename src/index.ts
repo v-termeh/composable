@@ -4,3 +4,6 @@ export * from "./useTimer";
 export * from "./useSigner";
 export * from "./useFilter";
 export * from "./useMask";
+export * from "./useAutoClear";
+export * from "./useAutoFocus";
+export * from "./useAutoSelect";
