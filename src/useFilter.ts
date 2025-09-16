@@ -2,6 +2,7 @@ import { computed, reactive } from "vue";
 import type { PrimitiveType, CompoundType } from "@v-termeh/utils";
 import { isString, isNumber, isNumeric, isArray, isCompoundType, isObject } from "@v-termeh/utils";
 import { useSigner } from "./useSigner";
+import { useStorage } from "./useStorage";
 
 type OrderType = "asc" | "desc";
 type StorableType = "limit" | "sorts";
@@ -47,7 +48,7 @@ export function useFilter<TRecord extends object, TMeta extends object>(
     const utils = useUtils();
     const signer = useSigner();
     const encoder = useEncoder();
-    const storage = useStorage(storagePrefix);
+    const storage = useStorage(localStorage, storagePrefix);
     const response = useResponse<TRecord, TMeta>();
 
     // options with defaults
@@ -67,10 +68,10 @@ export function useFilter<TRecord extends object, TMeta extends object>(
             ...utils.removeZero(options?.defaults),
             ...utils.removeZero({
                 limit: utils.isValidOption("limit", options?.storables)
-                    ? storage.readNumber("limit")
+                    ? storage.number("limit")
                     : undefined,
                 sort: utils.isValidOption("sorts", options?.storables)
-                    ? encoder.decodeSorts(storage.read("sorts") || "") || undefined
+                    ? encoder.decodeSorts(storage.string("sorts") || "") || undefined
                     : undefined,
             }),
         },
@@ -182,10 +183,10 @@ export function useFilter<TRecord extends object, TMeta extends object>(
                 const limit = utils.positiveSafe(stats.limit, 0)!;
                 const sorts = utils.arraySafe<Sort>(stats.sorts, [])!;
                 if (utils.isValidOption("limit", options?.storables) && limit > 0) {
-                    storage.store("limit", limit.toString());
+                    storage.set("limit", limit.toString());
                 }
                 if (utils.isValidOption("sorts", options?.storables) && sorts.length) {
-                    storage.store("sorts", encoder.encodeSorts(sorts));
+                    storage.set("sorts", encoder.encodeSorts(sorts));
                 }
             }
         } finally {
@@ -536,113 +537,6 @@ function useEncoder() {
         encodeSorts,
         decodeSorts,
     };
-}
-
-/**
- * Creates a storage utility with a prefix for organizing keys in localStorage.
- * @param prefix A prefix to namespace keys in localStorage. If empty or only whitespace, keys may lack a prefix.
- * @returns An object with methods to interact with localStorage.
- */
-function useStorage(prefix: string) {
-    prefix = (prefix || "").trim();
-
-    /**
-     * Normalizes keys by trimming, replacing multiple spaces with '::', and removing duplicate '::'.
-     * @param keys The keys to normalize.
-     * @returns A normalized key string, or empty string if no valid keys are provided.
-     */
-    function normalize(...keys: string[]): string {
-        const result: string[] = [];
-        for (let key of keys) {
-            key = (key || "").trim().replace(/\s+/g, "::");
-            if (key) {
-                result.push(key);
-            }
-        }
-
-        return result.join("::").replace(/(::)+/g, "::");
-    }
-
-    /**
-     * Checks if the storage utility is valid (prefix exists and localStorage is available).
-     * @returns True if prefix is non-empty and localStorage is available, false otherwise.
-     */
-    function isValid(): boolean {
-        try {
-            return !!prefix && localStorage !== undefined;
-        } catch {
-            return false;
-        }
-    }
-
-    /**
-     * Reads a value from localStorage for the given key.
-     * @param key The key to read (spaces are replaced with '::').
-     * @returns The stored value (trimmed) or undefined if not found, invalid, or if localStorage is unavailable.
-     */
-    function read(key: string): string | undefined {
-        key = normalize(key);
-        if (!isValid() || !key) return undefined;
-
-        try {
-            const value = localStorage.getItem(normalize(prefix, key));
-            return value?.trim() || undefined;
-        } catch (e) {
-            return undefined;
-        }
-    }
-
-    /**
-     * Reads a numeric value from localStorage for the given key.
-     * @param key The key to read (spaces are replaced with '::').
-     * @returns The stored number or undefined if not found, not a number, or if localStorage is unavailable.
-     */
-    function readNumber(key: string): number | undefined {
-        const value = Number(read(key));
-        if (!isNaN(value) && isFinite(value)) {
-            return value;
-        }
-
-        return undefined;
-    }
-
-    /**
-     * Stores a value in localStorage for the given key.
-     * @param key The key to store (spaces are replaced with '::').
-     * @param value The value to store. If null, undefined, or empty after trimming, nothing is stored.
-     * @returns True if stored successfully, false if key/value is invalid or localStorage is unavailable.
-     */
-    function store(key: string, value?: string): boolean {
-        key = normalize(key);
-        value = (value || "").trim();
-        if (!isValid() || !key || !value) return false;
-
-        try {
-            localStorage.setItem(normalize(prefix, key), value);
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
-
-    /**
-     * Removes a key from localStorage.
-     * @param key The key to remove (spaces are replaced with '::').
-     * @returns True if removed successfully, false if key is invalid or localStorage is unavailable.
-     */
-    function remove(key: string): boolean {
-        key = normalize(key);
-        if (!isValid() || !key) return false;
-
-        try {
-            localStorage.removeItem(normalize(prefix, key));
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
-
-    return { isValid, read, readNumber, store, remove };
 }
 
 /**
