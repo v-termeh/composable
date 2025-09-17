@@ -3,7 +3,7 @@
     "sideEffects": false,
     "type": "module",
     "license": "ISC",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "@v-termeh/composable",
     "description": "Reusable Vue 3 composables for common development tasks.",
     "main": "./dist/composable.cjs.js",
@@ -34,6 +34,7 @@
         "helper"
     ],
     "scripts": {
+        "test": "vitest",
         "demo": "vite --config vite.config.ts demo",
         "build": "vite build",
         "prepare": "npm run build"
@@ -43,12 +44,13 @@
         "@vitejs/plugin-vue": "^6.0.1",
         "typescript": "^5.9.2",
         "vite": "^7.1.5",
-        "vite-plugin-dts": "^4.5.4"
+        "vite-plugin-dts": "^4.5.4",
+        "vitest": "^3.2.4"
     },
     "peerDependencies": {
         "@maskito/core": "^3.10.3",
         "@maskito/kit": "^3.10.3",
-        "@v-termeh/utils": "^1.0.0",
+        "@v-termeh/utils": "^1.0.2",
         "@vueuse/core": "^13.9.0",
         "vue": "^3.5.0"
     }
