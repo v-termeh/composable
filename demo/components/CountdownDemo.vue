@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCountdown } from "../../src/useCountdown";
-const { timer, isTimerRunning, startTimer, pauseTimer, resumeTimer, stopTimer } = useCountdown();
+const { timer, startTimer, pauseTimer, resumeTimer, stopTimer } =
+    useCountdown();
 function start() {
     startTimer(65, "seconds");
 }

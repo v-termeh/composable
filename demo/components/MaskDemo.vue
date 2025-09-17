@@ -52,8 +52,8 @@ watch(
             <input ref="test2" placeholder="Type here for input mask..." />
         </div>
         <small
-            >Try changing the mask pattern and typing in the inputs. All changes are
-            reactive.</small
+            >Try changing the mask pattern and typing in the inputs. All changes
+            are reactive.</small
         >
     </div>
 </template>

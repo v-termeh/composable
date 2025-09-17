@@ -1,4 +1,12 @@
-import { computed, ref, type Slot, type VNode, Comment, Text, Fragment } from "vue";
+import {
+    computed,
+    ref,
+    type Slot,
+    type VNode,
+    Comment,
+    Text,
+    Fragment,
+} from "vue";
 import type { VNodeChild } from "@vue/runtime-core";
 
 /**
@@ -54,7 +62,8 @@ export function useEmptySlot(slot?: Slot) {
 
         try {
             const nodes: VNode[] | undefined = slot();
-            if (!nodes || !Array.isArray(nodes) || nodes.length === 0) return true;
+            if (!nodes || !Array.isArray(nodes) || nodes.length === 0)
+                return true;
             return !nodes.some((node) => !isVNodeEmpty(node));
         } catch (err) {
             console.warn("Error evaluating slot:", err);

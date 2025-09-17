@@ -18,7 +18,10 @@ type ClearableElement = Pick<
  * @param inputRef Ref to an input or textarea element
  * @param separator Optional string to determine selection boundaries
  */
-export function useAutoClear(inputRef: TemplateRef<ClearableElement | null>, separator?: string) {
+export function useAutoClear(
+    inputRef: TemplateRef<ClearableElement | null>,
+    separator?: string
+) {
     if (!inputRef) return;
 
     const handler = (ev: KeyboardEvent) => {
@@ -51,7 +54,9 @@ export function useAutoClear(inputRef: TemplateRef<ClearableElement | null>, sep
         }
 
         el.setRangeText("", start, end);
-        el.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
+        el.dispatchEvent(
+            new Event("input", { bubbles: true, cancelable: true })
+        );
     };
 
     onMounted(() => {

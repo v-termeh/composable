@@ -15,15 +15,23 @@ const defaultFilters: Partial<Filters> = {
     },
 };
 
-
-const { page, limit, search, sorts, filters, isFiltered, apply, onApply, parseURL, parseResponse } = useFilter<any, any>(
-    "demo-filters",
-    { defaults: defaultFilters }
-);
+const {
+    page,
+    limit,
+    search,
+    sorts,
+    filters,
+    isFiltered,
+    apply,
+    onApply,
+    parseURL,
+    parseResponse,
+} = useFilter<any, any>("demo-filters", { defaults: defaultFilters });
 // Test parseURL
 function testParseURL() {
     // Simulate a query string for filters
-    const query = "page=3&limit=5&search=foo&sorts=price:desc,id:asc&category=books,ebooks&available=true";
+    const query =
+        "page=3&limit=5&search=foo&sorts=price:desc,id:asc&category=books,ebooks&available=true";
     console.log("Testing parseURL with:", query);
     parseURL(query);
     // The onApply callback and watcher will log the result
@@ -36,9 +44,7 @@ function testParseResponse() {
         page: 4,
         limit: 15,
         search: "bar",
-        sorts: [
-            { field: "id", order: "desc" },
-        ],
+        sorts: [{ field: "id", order: "desc" }],
         filters: {
             price: { min: 10, max: 99 },
             available: false,
@@ -61,7 +67,13 @@ onApply((params, urlEncoded) => {
 
 // Watchers for demonstration
 watch([page, limit, search, sorts, filters], ([p, l, s, so, f]) => {
-    console.log("Filter state changed:", { page: p, limit: l, search: s, sorts: so, filters: f });
+    console.log("Filter state changed:", {
+        page: p,
+        limit: l,
+        search: s,
+        sorts: so,
+        filters: f,
+    });
 });
 
 function updateFilters() {
@@ -87,7 +99,12 @@ function resetFilters() {
             </label>
             <label style="margin-left: 1em">
                 Limit:
-                <input type="number" v-model="newLimit" min="1" style="width: 4em" />
+                <input
+                    type="number"
+                    v-model="newLimit"
+                    min="1"
+                    style="width: 4em"
+                />
             </label>
             <label style="margin-left: 1em">
                 Sort by:
@@ -100,10 +117,18 @@ function resetFilters() {
                     <option value="desc">desc</option>
                 </select>
             </label>
-            <button @click="updateFilters" style="margin-left: 1em">Apply</button>
-            <button @click="resetFilters" style="margin-left: 0.5em">Reset</button>
-            <button @click="testParseURL" style="margin-left: 1em">Test parseURL</button>
-            <button @click="testParseResponse" style="margin-left: 0.5em">Test parseResponse</button>
+            <button @click="updateFilters" style="margin-left: 1em">
+                Apply
+            </button>
+            <button @click="resetFilters" style="margin-left: 0.5em">
+                Reset
+            </button>
+            <button @click="testParseURL" style="margin-left: 1em">
+                Test parseURL
+            </button>
+            <button @click="testParseResponse" style="margin-left: 0.5em">
+                Test parseResponse
+            </button>
         </div>
         <div>
             <b>Current Filters:</b>
@@ -117,7 +142,10 @@ function resetFilters() {
                     isFiltered,
                 }
             }}</pre>
-            <small>All filter state changes and onApply callback are logged in the console.</small>
+            <small
+                >All filter state changes and onApply callback are logged in the
+                console.</small
+            >
         </div>
     </div>
 </template>

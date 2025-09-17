@@ -3,7 +3,11 @@ import { onMounted, onUnmounted } from "vue";
 
 type SelectableElement = Pick<
     HTMLInputElement,
-    "addEventListener" | "removeEventListener" | "selectionStart" | "setSelectionRange" | "value"
+    | "addEventListener"
+    | "removeEventListener"
+    | "selectionStart"
+    | "setSelectionRange"
+    | "value"
 >;
 
 /**
@@ -12,7 +16,10 @@ type SelectableElement = Pick<
  * @param inputRef Ref to an input or textarea element
  * @param separator Optional string to determine selection boundaries
  */
-export function useAutoSelect(inputRef: TemplateRef<SelectableElement | null>, separator?: string) {
+export function useAutoSelect(
+    inputRef: TemplateRef<SelectableElement | null>,
+    separator?: string
+) {
     if (!inputRef) return;
 
     const handler = () => {

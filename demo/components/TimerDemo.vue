@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTimer } from "../../src/useTimer";
-const { timer, isTimerRunning, startTimer, stopTimer } = useTimer();
+const { timer, startTimer, stopTimer } = useTimer();
 function start() {
     startTimer(65, "seconds");
 }

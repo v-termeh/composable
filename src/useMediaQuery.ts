@@ -24,9 +24,13 @@ export function useMediaQueries() {
     /** @description Detects if the viewport width is 768px or less (mobile) on screen devices. */
     const isMobile = useMediaQuery("screen and (max-width: 768px)");
     /** @description Detects if the viewport width is between 769px and 1023px (tablet only) on screen devices. */
-    const isTabletOnly = useMediaQuery("screen and (min-width: 769px) and (max-width: 1023px)");
+    const isTabletOnly = useMediaQuery(
+        "screen and (min-width: 769px) and (max-width: 1023px)"
+    );
     /** @description Detects if the viewport width is between 1024px and 1215px (desktop only) on screen devices. */
-    const isDesktopOnly = useMediaQuery("screen and (min-width: 1024px) and (max-width: 1215px)");
+    const isDesktopOnly = useMediaQuery(
+        "screen and (min-width: 1024px) and (max-width: 1215px)"
+    );
     /** @description Detects if the viewport width is between 1216px and 1407px (widescreen only) on screen devices. */
     const isWidescreenOnly = useMediaQuery(
         "screen and (min-width: 1216px) and (max-width: 1407px)"
@@ -54,15 +58,25 @@ export function useMediaQueries() {
     /** @description Detects if the device supports high dynamic range (HDR). */
     const prefersHDR = useMediaQuery("(dynamic-range: high)");
     /** @description Detects if the user prefers a dark color scheme on screen devices. */
-    const prefersDark = useMediaQuery("screen and (prefers-color-scheme: dark)");
+    const prefersDark = useMediaQuery(
+        "screen and (prefers-color-scheme: dark)"
+    );
     /** @description Detects if the user prefers a light color scheme on screen devices. */
-    const prefersLight = useMediaQuery("screen and (prefers-color-scheme: light)");
+    const prefersLight = useMediaQuery(
+        "screen and (prefers-color-scheme: light)"
+    );
     /** @description Detects if the user prefers reduced motion (e.g., for accessibility) on screen devices. */
-    const prefersReducedMotion = useMediaQuery("screen and (prefers-reduced-motion: reduce)");
+    const prefersReducedMotion = useMediaQuery(
+        "screen and (prefers-reduced-motion: reduce)"
+    );
     /** @description Detects if the user prefers higher contrast (e.g., for accessibility) on screen devices. */
-    const prefersMoreContrast = useMediaQuery("screen and (prefers-contrast: more)");
+    const prefersMoreContrast = useMediaQuery(
+        "screen and (prefers-contrast: more)"
+    );
     /** @description Detects if the user prefers lower contrast (e.g., for accessibility) on screen devices. */
-    const prefersLessContrast = useMediaQuery("screen and (prefers-contrast: less)");
+    const prefersLessContrast = useMediaQuery(
+        "screen and (prefers-contrast: less)"
+    );
 
     // Print
     /** @description Detects if the content is being viewed in print mode. */

@@ -27,7 +27,9 @@ export function useShortcut(
                 shift: parts.includes("shift"),
                 alt: parts.includes("alt"),
                 meta: parts.includes("meta"),
-                key: parts.find((k) => !["ctrl", "shift", "alt", "meta"].includes(k)),
+                key: parts.find(
+                    (k) => !["ctrl", "shift", "alt", "meta"].includes(k)
+                ),
             };
         });
 

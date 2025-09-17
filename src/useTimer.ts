@@ -34,14 +34,19 @@ export function useTimer() {
     /**
      * A computed property indicating whether the timer is actively counting down.
      */
-    const isTimerRunning = computed(() => endTime !== null && Date.now() < endTime);
+    const isTimerRunning = computed(
+        () => endTime !== null && Date.now() < endTime
+    );
 
     /**
      * Starts the countdown timer with the specified duration.
      * @param duration - The duration to count down from (non-negative number).
      * @param unit - The unit of the duration.
      */
-    function startTimer(duration: number, unit: "milliseconds" | "seconds" = "seconds") {
+    function startTimer(
+        duration: number,
+        unit: "milliseconds" | "seconds" = "seconds"
+    ) {
         duration = Number(duration);
         if (!duration || !Number.isFinite(duration) || duration < 0) return;
 

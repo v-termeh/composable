@@ -1,5 +1,9 @@
 import type { TemplateRef } from "vue";
-import type { MaskitoMask, MaskitoOptions, MaskitoElement } from "@maskito/core";
+import type {
+    MaskitoMask,
+    MaskitoOptions,
+    MaskitoElement,
+} from "@maskito/core";
 import type { MaskitoNumberParams } from "@maskito/kit";
 import { onMounted, onUnmounted } from "vue";
 import { maskitoTransform, Maskito } from "@maskito/core";
@@ -57,7 +61,10 @@ export function customMask(option: MaskitoOptions): MaskOption {
  * @param globalOptions Default Maskito options
  * @param customTokens Optional custom tokens
  */
-export function useMask(globalOptions?: MaskitoOptions, customTokens?: MaskTokenMap) {
+export function useMask(
+    globalOptions?: MaskitoOptions,
+    customTokens?: MaskTokenMap
+) {
     const defaultTokens = {
         "#": /[0-9]/,
         A: /[a-z]/i,
@@ -76,7 +83,11 @@ export function useMask(globalOptions?: MaskitoOptions, customTokens?: MaskToken
      * @returns The masked string
      */
     function mask(value: string, option: MaskOption): string {
-        const resolvedOptions = resolveOptions(defaultTokens, defaultOptions, option);
+        const resolvedOptions = resolveOptions(
+            defaultTokens,
+            defaultOptions,
+            option
+        );
         return maskitoTransform(value, resolvedOptions);
     }
 
@@ -87,7 +98,11 @@ export function useMask(globalOptions?: MaskitoOptions, customTokens?: MaskToken
      * @returns Controller with `destroy()` method
      */
     function attachToInput(input: MaskitoElement, option: MaskOption) {
-        const resolvedOptions = resolveOptions(defaultTokens, defaultOptions, option);
+        const resolvedOptions = resolveOptions(
+            defaultTokens,
+            defaultOptions,
+            option
+        );
         const instance = new Maskito(input, resolvedOptions);
 
         return {
@@ -105,7 +120,10 @@ export function useMask(globalOptions?: MaskitoOptions, customTokens?: MaskToken
      * @param option MaskOption defining mask/options
      * @returns Controller with `update()` and `destroy()` methods
      */
-    function useInputMask(inputRef: TemplateRef<MaskitoElement | null>, option: MaskOption) {
+    function useInputMask(
+        inputRef: TemplateRef<MaskitoElement | null>,
+        option: MaskOption
+    ) {
         let instance: { destroy: () => void } | null = null;
 
         function attach(opt: MaskOption) {
@@ -179,5 +197,7 @@ function resolveOptions(
     option: MaskOption
 ): MaskitoOptions {
     const mergedOptions = { ...globalOptions, ...(option.options ?? {}) };
-    return option.mask ? { ...mergedOptions, mask: parseMask(tokens, option.mask) } : mergedOptions;
+    return option.mask
+        ? { ...mergedOptions, mask: parseMask(tokens, option.mask) }
+        : mergedOptions;
 }

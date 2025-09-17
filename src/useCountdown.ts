@@ -47,7 +47,10 @@ export function useCountdown() {
      * @param duration - The duration to count down from (non-negative number).
      * @param unit - The unit of the duration.
      */
-    function startTimer(duration: number, unit: "milliseconds" | "seconds" = "seconds") {
+    function startTimer(
+        duration: number,
+        unit: "milliseconds" | "seconds" = "seconds"
+    ) {
         duration = Number(duration);
         if (!duration || !Number.isFinite(duration) || duration < 0) return;
 

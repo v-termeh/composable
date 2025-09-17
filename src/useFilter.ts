@@ -1,6 +1,13 @@
 import { computed, reactive } from "vue";
 import type { PrimitiveType, CompoundType } from "@v-termeh/utils";
-import { isString, isNumber, isNumeric, isArray, isCompoundType, isObject } from "@v-termeh/utils";
+import {
+    isString,
+    isNumber,
+    isNumeric,
+    isArray,
+    isCompoundType,
+    isObject,
+} from "@v-termeh/utils";
 import { useSigner } from "./useSigner";
 import { useStorage } from "./useStorage";
 
@@ -71,7 +78,8 @@ export function useFilter<TRecord extends object, TMeta extends object>(
                     ? storage.number("limit")
                     : undefined,
                 sort: utils.isValidOption("sorts", options?.storables)
-                    ? encoder.decodeSorts(storage.string("sorts") || "") || undefined
+                    ? encoder.decodeSorts(storage.string("sorts") || "") ||
+                      undefined
                     : undefined,
             }),
         },
@@ -162,7 +170,8 @@ export function useFilter<TRecord extends object, TMeta extends object>(
             }
 
             if (isObject(filters.filters)) {
-                stats.filters = (utils.removeZero(filters.filters) ?? {}) as FilterType;
+                stats.filters = (utils.removeZero(filters.filters) ??
+                    {}) as FilterType;
             }
 
             // Store changes and call callback
@@ -182,10 +191,16 @@ export function useFilter<TRecord extends object, TMeta extends object>(
                 // Store filter options
                 const limit = utils.positiveSafe(stats.limit, 0)!;
                 const sorts = utils.arraySafe<Sort>(stats.sorts, [])!;
-                if (utils.isValidOption("limit", options?.storables) && limit > 0) {
+                if (
+                    utils.isValidOption("limit", options?.storables) &&
+                    limit > 0
+                ) {
                     storage.set("limit", limit.toString());
                 }
-                if (utils.isValidOption("sorts", options?.storables) && sorts.length) {
+                if (
+                    utils.isValidOption("sorts", options?.storables) &&
+                    sorts.length
+                ) {
                     storage.set("sorts", encoder.encodeSorts(sorts));
                 }
             }
@@ -338,7 +353,9 @@ function useEncoder() {
      * @returns The encoded value, with null represented as "[null]".
      */
     function encodeValue(v: PrimitiveType): string {
-        return v == null ? encodeURIComponent("[null]") : encodeURIComponent(String(v));
+        return v == null
+            ? encodeURIComponent("[null]")
+            : encodeURIComponent(String(v));
     }
 
     /**
@@ -416,7 +433,10 @@ function useEncoder() {
      */
     function encodeSorts(sorts: Sort[]): string {
         return sorts
-            .map((sort) => `${encodeValue(sort.field)}:${encodeValue(sort.order)}`)
+            .map(
+                (sort) =>
+                    `${encodeValue(sort.field)}:${encodeValue(sort.order)}`
+            )
             .join(",");
     }
 
@@ -434,7 +454,9 @@ function useEncoder() {
                 if (!field.trim() || !order) return undefined;
                 const f = decodeValue(field.trim());
                 const o = decodeValue(order);
-                return f && utils.isOrderType(o) ? { field: f, order: o } : undefined;
+                return f && utils.isOrderType(o)
+                    ? { field: f, order: o }
+                    : undefined;
             })
             .filter((i): i is Sort => i !== undefined);
     }
@@ -493,11 +515,17 @@ function useEncoder() {
             filters: {},
         };
 
-        if (params.has("page") && utils.positiveSafe(params.get("page"), 0)! > 0) {
+        if (
+            params.has("page") &&
+            utils.positiveSafe(params.get("page"), 0)! > 0
+        ) {
             state.page = Number(params.get("page"));
         }
 
-        if (params.has("limit") && utils.positiveSafe(params.get("limit"), 0)! > 0) {
+        if (
+            params.has("limit") &&
+            utils.positiveSafe(params.get("limit"), 0)! > 0
+        ) {
             state.limit = Number(params.get("limit"));
         }
 
@@ -592,7 +620,9 @@ function useUtils() {
      * @param v The input object to process (optional).
      * @returns A new object with all undefined values removed. Returns an empty object if input is undefined or null.
      */
-    function removeZero<T extends Record<string, unknown>>(v?: T): Record<string, unknown> {
+    function removeZero<T extends Record<string, unknown>>(
+        v?: T
+    ): Record<string, unknown> {
         if (isObject(v)) {
             return Object.fromEntries(
                 Object.entries(v).filter(

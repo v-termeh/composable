@@ -82,7 +82,9 @@ export function useSigner() {
         const encodedData = encoder.encode(flatted);
         const hashBuffer = await crypto.subtle.digest("SHA-256", encodedData);
         const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+        const hashHex = hashArray
+            .map((b) => b.toString(16).padStart(2, "0"))
+            .join("");
         return hashHex;
     }
 
@@ -92,7 +94,10 @@ export function useSigner() {
      * @param signature The checksum to compare against.
      * @returns A Promise that resolves to a boolean indicating the validation result.
      */
-    async function validate(data: unknown, signature: string): Promise<boolean> {
+    async function validate(
+        data: unknown,
+        signature: string
+    ): Promise<boolean> {
         const newSign = await sign(data);
         return newSign === signature;
     }
