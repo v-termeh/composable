@@ -3,7 +3,7 @@
     "sideEffects": false,
     "type": "module",
     "license": "ISC",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "name": "@v-termeh/composable",
     "description": "Reusable Vue 3 composables for common development tasks.",
     "main": "./dist/composable.cjs.js",
@@ -50,7 +50,7 @@
     "peerDependencies": {
         "@maskito/core": "^3.10.3",
         "@maskito/kit": "^3.10.3",
-        "@v-termeh/utils": "^1.0.2",
+        "@v-termeh/utils": "^1.0.3",
         "@vueuse/core": "^13.9.0",
         "vue": "^3.5.0"
     }
