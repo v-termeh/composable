@@ -3,7 +3,7 @@
     "sideEffects": false,
     "type": "module",
     "license": "ISC",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "name": "@v-termeh/composable",
     "description": "Reusable Vue 3 composables for common development tasks.",
     "main": "./dist/composable.cjs.js",
